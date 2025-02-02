@@ -1,0 +1,17 @@
+services:
+  redis-test:
+    container_name: redis-test
+    image: redis:7.2.4-alpine3.19
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning
+    volumes:
+      - cache:/data
+volumes:
+  cache:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/mark/Development/data/redis
+      o: bind
